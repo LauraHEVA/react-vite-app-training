@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import PokemonList from './pages/PokemonList'
 import MathsPanel from './pages/MathsPanel'
+import PokemonDetail from './pages/PokemonDetail'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/pokemon" element={<PokemonList />} />
         <Route path="/maths" element={<MathsPanel />} />
+        <Route path="/pokemon/:name" element={<PokemonDetail />} />
       </Routes>
     </div>
   )
