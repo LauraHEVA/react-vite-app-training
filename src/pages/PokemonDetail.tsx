@@ -15,7 +15,7 @@ export default function PokemonDetail() {
     const [pokemon, setPokemon] = useState<Pokemon | null>(null)
 
     useEffect(() => {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        fetch(`${import.meta.env.VITE_URL_POKEMON_API}/pokemon/${name}`)
             .then(res => res.json())
             .then(data => setPokemon(data))
     }, [name])
