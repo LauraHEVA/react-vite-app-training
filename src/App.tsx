@@ -1,27 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
 
-import './App.css'
-import Title from './components/title/Title'
+import Home from './pages/Home'
+import PokemonList from './pages/PokemonList'
+import MathsPanel from './pages/MathsPanel'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Title text="To-Do List" />
-    </>
+    <div>
+      <nav style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+        <Link to="/">Home</Link>
+        <Link to="/pokemon">Pokémon</Link>
+        <Link to="/maths">Maths</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/pokemon" element={<PokemonList />} />
+        <Route path="/maths" element={<MathsPanel />} />
+      </Routes>
+    </div>
   )
 }
 

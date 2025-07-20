@@ -1,9 +1,11 @@
 import React from 'react';
 
-const Title = (text) => {
+type TitleProps = { text: string };
+
+const Title = (props: TitleProps) => {
     return (
         <h1>
-            {text}
+            {props.text}
         </h1>
     );
 }
