@@ -5,7 +5,7 @@ import Title from '../components/title/Title';
 import { Link } from 'react-router-dom';
 
 export default function PokemonList() {
-    const [pokemonsList, setPokemonsList] = useState<{ name: string; url: string }[]>([]);
+    const [pokemonList, setPokemonList] = useState<{ name: string }[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -16,7 +16,7 @@ export default function PokemonList() {
                 if (!response.ok) throw new Error('Error al obtener los Pokémon')
 
                 const data = await response.json()
-                setPokemonsList(data.results)
+                setPokemonList(data.results)
             } catch (error: any) {
                 setError(error.message)
             } finally {
@@ -32,10 +32,10 @@ export default function PokemonList() {
 
     return (
         <>
-            <Title text="Pokémons List" />
+            <Title text="Pokémon List" />
             <ul>
-                {pokemonsList.map((pokemon, index) => (
-                    <li key={pokemon.name}>
+                {pokemonList.map((pokemon, index) => (
+                    <li key={index}>
                         <Link to={`/pokemon/${pokemon.name}`}>{pokemon.name}</Link>
                     </li>
                 ))}
