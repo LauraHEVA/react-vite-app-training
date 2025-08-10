@@ -13,6 +13,9 @@ function CountPanel() {
         <button onClick={() => setCount((count) => count - 1)}>
           Restar
         </button>
+        <button onClick={() => setCount(0)}>
+          Reset
+        </button>
       </div>
       <p className="result">Count: {count}</p>
     </>

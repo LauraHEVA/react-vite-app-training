@@ -26,9 +26,10 @@ export default function PokemonDetail() {
 
     const fetchGif = async () => {
         const apiKey = import.meta.env.VITE_GIPHY_API_KEY;
-        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${name}&limit=1`);
+        const randomNumber = Math.floor(Math.random() * 20);
+        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${name}&limit=25`);
         const data = await response.json();
-        const url = data.data[0]?.images?.downsized_large?.url;
+        const url = data.data[randomNumber]?.images?.downsized_large?.url;
         setGifUrl(url || null);
         setShowModal(true);
     };
