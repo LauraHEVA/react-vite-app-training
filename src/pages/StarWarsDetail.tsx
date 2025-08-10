@@ -7,12 +7,22 @@ type person = {
     mass: string,
 }
 
-
 export default function StarWarsDetail() {
     const { index } = useParams<{ index: string }>()
     const [person, setPerson] = useState<person>();
     const [error, setError] = useState(null);
+    const [gifUrl, setGifUrl] = useState<string | null>(null);
+    // const [showGif, setShowGif] = useState(false);
     const personId = Number(index) + 1;
+
+    const fetchGif = async () => {
+        const apiKey = import.meta.env.VITE_GIPHY_API_KEY;
+        const randomNumber = Math.floor(Math.random() * 20);
+        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${person.name}&limit=20`);
+        const data = await response.json();
+        const url = data.data[randomNumber]?.images?.downsized_large?.url;
+        setGifUrl(url || null);
+    };
 
     useEffect(() => {
         async function fetchPerson() {
@@ -30,21 +40,31 @@ export default function StarWarsDetail() {
         fetchPerson();
     }, [index]);
 
+    useEffect(() => {
+        fetchGif();
+    }, [person]);
+
+    if (!person) {
+        return <p>Loading...</p>;
+    }
+
     if (error) {
         return <p>{error}</p>;
     }
 
     return (
         <>
-            <p>Star Wars Detail Page</p>
-            {person ? (
+            <h2>Star Wars Detail page</h2>
+            <div>
+                <h3>{person.name}</h3>
+                <p>Height: {person.height}</p>
+                <p>Mass: {person.mass}</p>
+            </div>
+
+            {gifUrl && (
                 <div>
-                    <h2>{person.name}</h2>
-                    <p>Height: {person.height}</p>
-                    <p>Mass: {person.mass}</p>
+                    <img src={gifUrl} alt="GIF" style={{ maxWidth: '100%' }} />
                 </div>
-            ) : (
-                <p>Loading...</p>
             )}
         </>)
 }
