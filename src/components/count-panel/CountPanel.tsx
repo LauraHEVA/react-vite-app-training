@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import './CountPanel.css'
+import styles from './CountPanel.module.css'
 
 function CountPanel() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className="card">
+      <div className={styles.card}>
         <button onClick={() => setCount((count) => count + 1)}>
           Sumar
         </button>
@@ -17,7 +17,7 @@ function CountPanel() {
           Reset
         </button>
       </div>
-      <p className="result">Count: {count}</p>
+      <p className={styles.result}>Count: {count}</p>
     </>
   )
 }

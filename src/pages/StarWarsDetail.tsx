@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-type person = {
+type Person = {
     name: string,
     height: string,
     mass: string,
@@ -9,10 +9,9 @@ type person = {
 
 export default function StarWarsDetail() {
     const { index } = useParams<{ index: string }>()
-    const [person, setPerson] = useState<person>();
+    const [person, setPerson] = useState<Person>();
     const [error, setError] = useState(null);
     const [gifUrl, setGifUrl] = useState<string | null>(null);
-    // const [showGif, setShowGif] = useState(false);
     const personId = Number(index) + 1;
 
     const fetchGif = async () => {
